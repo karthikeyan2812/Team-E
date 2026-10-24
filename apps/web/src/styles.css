@@ -1,0 +1,138 @@
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  color: #17243a;
+  background: #f3f6fb;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.workspace {
+  width: min(100% - 40px, 1040px);
+  margin: 0 auto;
+  padding: 12vh 0 64px;
+}
+
+.hero {
+  padding: 48px;
+  border: 1px solid #e0e7f1;
+  border-radius: 24px;
+  background: linear-gradient(130deg, #ffffff 15%, #edf4ff 100%);
+  box-shadow: 0 24px 60px rgb(36 62 100 / 8%);
+}
+
+.eyebrow {
+  margin: 0 0 16px;
+  color: #4968a8;
+  font-size: 0.75rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  max-width: 720px;
+  margin-bottom: 16px;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+}
+
+.intro {
+  max-width: 600px;
+  margin-bottom: 28px;
+  color: #56667e;
+  font-size: 1.12rem;
+  line-height: 1.65;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid #c8e9d8;
+  border-radius: 999px;
+  background: #f0fbf5;
+  color: #236b43;
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #28a260;
+}
+
+.next-step {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 24px;
+  padding: 28px 32px;
+  border: 1px solid #e0e7f1;
+  border-radius: 20px;
+  background: #ffffff;
+}
+
+.next-step .eyebrow {
+  margin-bottom: 10px;
+}
+
+.next-step h2 {
+  margin-bottom: 8px;
+  font-size: 1.25rem;
+}
+
+.next-step p:last-child {
+  max-width: 640px;
+  margin-bottom: 0;
+  color: #66758b;
+  line-height: 1.6;
+}
+
+.phase-badge {
+  flex: 0 0 auto;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #edf2fc;
+  color: #395b9b;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .workspace {
+    width: min(100% - 24px, 1040px);
+    padding-top: 40px;
+  }
+
+  .hero {
+    padding: 30px 24px;
+  }
+
+  .next-step {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 24px;
+  }
+}
+

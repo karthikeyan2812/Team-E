@@ -1,0 +1,16 @@
+{
+  "name": "icepot-qa-workflow-assistant",
+  "private": true,
+  "workspaces": [
+    "apps/api",
+    "apps/web",
+    "packages/contracts"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace @icepot/contracts && npm run build --workspace @icepot/api && npm run build --workspace @icepot/web",
+    "dev:api": "npm run build --workspace @icepot/contracts && npm run dev --workspace @icepot/api",
+    "dev:web": "npm run dev --workspace @icepot/web",
+    "test": "npm run build --workspace @icepot/contracts && npm run test --workspace @icepot/api && npm run test --workspace @icepot/web",
+    "typecheck": "npm run build --workspace @icepot/contracts && npm run typecheck --workspace @icepot/api && npm run typecheck --workspace @icepot/web"
+  }
+}
