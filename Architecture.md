@@ -75,8 +75,9 @@ implemented:
 
 | Decision | Current status | Dependency / impact |
 |---|---|---|
-| RAG corpus (QA standards, existing cases, or other approved content) | Pending | Required before useful grounded retrieval can be accepted |
-| Exact Jira Cloud authentication mechanism, permissions, and fields | Pending | Required for connector implementation; use read-only access |
+| RAG corpus locations, Jira project keys, formats, and exact scope | Pending; indexing explicitly disabled until provided | Required before any source can be indexed or grounded retrieval accepted |
+| Jira Cloud authentication | Confirmed: account email plus API token, read-only use | Credentials must be configured locally; no tokens in source control |
+| Jira project keys and required issue fields | Pending | Required before live issue reads are enabled |
 | MongoDB deployment and whether it offers suitable vector search | Pending | Qdrant remains the approved provisional vector store |
 | Local model and hardware/runtime requirements | Pending | Ollama is the provisional local runtime; model selection is open |
 | Test-case schema and required fields | Pending | Use the proposal in section 10 only after confirmation |
@@ -369,6 +370,14 @@ authentication and authorization design.
 Reports API status and dependency readiness. It must not include
 credentials, internal prompts, or sensitive configuration.
 
+### `GET /api/dependencies`
+
+Checks MongoDB, Qdrant, and Ollama connectivity and returns only `up` or
+`down` per service plus an overall `ready` or `degraded` state. It does
+not expose connection strings or dependency error details. Jira is not
+probed by this endpoint because its authentication and fields remain
+pending.
+
 ### `GET /api/jira/issues`
 
 Read-only, bounded search. Proposed query parameters: `projectKey` and
@@ -615,6 +624,19 @@ before the next phase begins.
   logs/responses.
 - **Gate:** blocked until Jira auth/fields and RAG sources are confirmed.
 
+**Implementation status:** MongoDB, Qdrant, Ollama, and read-only Jira
+adapters are in place with mocked tests. Live dependency readiness is
+reported by `GET /api/dependencies`. Jira account-email/API-token
+authentication has been confirmed for read-only use; project keys,
+required issue fields, and local credentials remain to be configured
+before live requests. Source categories (QA guidelines, existing test
+cases, Jira issues, repository documentation, and anonymized samples)
+are approved in principle, but locations, project scope, formats,
+redaction, and retention are pending. Indexing remains explicitly
+disabled. Qdrant collection/vector configuration also depends on the
+embedding model. The local dependency endpoint currently reports
+MongoDB, Qdrant, and Ollama as unavailable.
+
 ### Phase 3 — Requirement-analysis agent and review UI
 
 - Implement LangChain.js retrieval and generation.
@@ -673,4 +695,3 @@ sanitized structured records, and report actual test/evaluation results.
 Script drafting and controlled execution are excluded from this initial
 definition of done until their pending decisions and approval gates are
 resolved.
-
